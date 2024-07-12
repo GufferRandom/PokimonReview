@@ -1,0 +1,6 @@
+@PokimonReview_HostAddress = http://localhost:1312321
+
+GET {{PokimonReview_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
