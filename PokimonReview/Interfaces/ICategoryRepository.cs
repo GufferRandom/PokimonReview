@@ -5,5 +5,7 @@ namespace PokimonReview.Interfaces
     public interface ICategoryRepository
     {
         ICollection<Category> GetCategory();
+       
+
     }
 }
