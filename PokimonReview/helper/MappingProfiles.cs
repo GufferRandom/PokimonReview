@@ -9,6 +9,7 @@ namespace PokimonReview.helper
         public MappingProfiles() { 
         CreateMap<Pokemon,PokemonDto>();
         CreateMap<Category,CategoryDto>();
+            CreateMap<Country, CountryDto>();
         }
     }
 }
