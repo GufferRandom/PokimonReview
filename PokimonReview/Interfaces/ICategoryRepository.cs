@@ -4,8 +4,10 @@ namespace PokimonReview.Interfaces
 {
     public interface ICategoryRepository
     {
-        ICollection<Category> GetCategory();
-       
+        ICollection<Category> GetCategories();
+        Category GetCategory(int id);
+        ICollection<Pokemon> GetPokemonByCategory(int pokeid);
 
+        bool CategoryExists(int id);
     }
 }
