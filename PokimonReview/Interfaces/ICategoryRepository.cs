@@ -9,5 +9,7 @@ namespace PokimonReview.Interfaces
         ICollection<Pokemon> GetPokemonByCategory(int pokeid);
 
         bool CategoryExists(int id);
+        bool AddCategory(Category category);
+        bool SaveChange();
     }
 }

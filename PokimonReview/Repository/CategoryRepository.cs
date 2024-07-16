@@ -28,5 +28,18 @@ namespace PokimonReview.Repository
         {
             return _context.PokemonCategories.Where(p=>p.CategoryId== pokeid).Select(p=>p.Pokemon).ToList();
         }
+
+        public bool AddCategory(Category category)
+        {
+            _context.Add(category);
+            return SaveChange();
+            
+        }
+
+        public bool SaveChange()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
     }
 }

@@ -5,6 +5,7 @@ using PokimonReview.Dto;
 using PokimonReview.Interfaces;
 using PokimonReview.Models;
 using PokimonReview.Repository;
+using System.Runtime.InteropServices;
 
 namespace PokimonReview.Controllers
 {
@@ -59,6 +60,34 @@ namespace PokimonReview.Controllers
                 return BadRequest(ModelState);
             }
             return Ok(pokemons);
+        }
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult CreateCategory([FromBody] CategoryDto category)
+        {
+            if (CreateCategory == null)
+            {
+                return BadRequest(ModelState);
+            }
+         var categori = _categoryRepository.GetCategories().Where(p => p.Name.ToUpper().Trim()==category.Name.ToUpper().TrimEnd()).FirstOrDefault();
+            if (categori != null)
+            {
+                 ModelState.AddModelError("","Category Exists");
+                return StatusCode(402, ModelState);
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var categorymap = _mapper.Map<Category>(category);
+            if (!_categoryRepository.AddCategory(categorymap))
+            {
+                ModelState.AddModelError("", "Some error");
+                return StatusCode(500,ModelState);
+
+            }
+            return Ok("Successfull created");
         }
     }
 }
