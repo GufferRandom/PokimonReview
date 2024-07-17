@@ -13,6 +13,8 @@ namespace PokimonReview.Repository
             _context = context;
         }
 
+       
+
         public Owner GetOwner(int ownerId)
         {
             return _context.Owners.Where(p=>p.Id == ownerId).FirstOrDefault();
@@ -31,6 +33,12 @@ namespace PokimonReview.Repository
         public ICollection<Pokemon> GetPokemonByOwner(int ownerid)
         {
             return _context.PokemonOwners.Where(p => p.Owner.Id == ownerid).Select(p=>p.Pokemon).ToList();
+        }
+        public bool AddOwner(Owner owner)
+        {
+            _context.Add(owner);
+            _context.SaveChanges();
+            return true;
         }
     }
 }

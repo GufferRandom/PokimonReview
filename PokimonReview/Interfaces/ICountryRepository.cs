@@ -9,5 +9,7 @@ namespace PokimonReview.Interfaces
         Country GetCountryByOwner(int id);
         ICollection<Owner> GetOwnersByCountry(int id);
         bool CountryExists(int id);
+        bool AddCountry(Country country);
+
     }
 }

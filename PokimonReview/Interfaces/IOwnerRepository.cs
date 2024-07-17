@@ -8,5 +8,6 @@ namespace PokimonReview.Interfaces
         Owner GetOwner(int ownerId);
         ICollection<Pokemon> GetPokemonByOwner(int ownerId);
         ICollection<Owner> GetOwnerOfAnPokemon(int pokeId);
+        bool AddOwner(Owner owner);
     }
 }

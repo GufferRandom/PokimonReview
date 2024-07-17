@@ -60,7 +60,35 @@ namespace PokimonReview.Controllers
             }
             return Ok(country);
         }
+        [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult CountryCreate([FromBody]CountryDto country)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (country == null)
+            {
+                return BadRequest(ModelState);
+            }
+            var countrydto = new Country
+            {
+                Id = country.Id,
+                Name = country.Name,
 
+            };
+            var exists = _countryRepository.GetCountries().Where(p=>p.Name.Trim() == country.Name.TrimEnd()).FirstOrDefault();
+            if (exists != null)
+            {
+                ModelState.AddModelError("", "Country Exists");
+                return StatusCode(409,ModelState);
+            }
+            _countryRepository.AddCountry(countrydto);
+            return Ok("Successfull created");
+        }
         
 
 

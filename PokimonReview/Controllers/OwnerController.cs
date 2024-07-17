@@ -13,10 +13,12 @@ namespace PokimonReview.Controllers
     {
         private readonly IOwnerRepository _ownerRepository;
         private readonly IMapper _mapper;
-        public OwnerController(IOwnerRepository ownerRepository, IMapper mapper)
+        private readonly ICountryRepository _countryRepository;
+        public OwnerController(IOwnerRepository ownerRepository, ICountryRepository countryRepository, IMapper mapper)
         {
             _ownerRepository = ownerRepository;
             _mapper = mapper;
+            _countryRepository = countryRepository;
         }
         [HttpGet]
         [ProducesResponseType(200,Type=typeof(ICollection<Owner>))]
@@ -66,6 +68,35 @@ namespace PokimonReview.Controllers
             var pokemons = _mapper.Map<List<Owner>>(_ownerRepository.GetOwnerOfAnPokemon(pokeid));
             return Ok(pokemons);
         }
+        [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult OwnerCreate([FromQuery] int country_id,[FromBody]OwnerDto owner)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (owner == null)
+            {
+                return BadRequest(ModelState);
+            }
+            var ownerO = new Owner { Id = owner.Id,FirstName = owner.FirstName,LastName = owner.LastName,Gym = owner.Gym };
+
+            var exists = _ownerRepository.GetOwners().Where(p => p.FirstName.ToUpper().Trim() == owner.FirstName.ToUpper().Trim()).FirstOrDefault();
+            if (exists != null) {
+                ModelState.AddModelError("", "It exists");
+                return StatusCode(409,ModelState);
+            
+            
+            }
+            ownerO.Country = _countryRepository.GetCountry(country_id);
+
+            _ownerRepository.AddOwner(ownerO);
+            return Ok("Successfull created");
+        }
+
 
     }
 }

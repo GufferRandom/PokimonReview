@@ -12,6 +12,7 @@ namespace PokimonReview.Repository
             _context = context;
         }
 
+     
         public bool CountryExists(int id)
         {
             return _context.Countries.Any(c => c.Id == id);
@@ -35,7 +36,14 @@ namespace PokimonReview.Repository
         {
             return _context.Owners.Where(p => p.Country.Id == id).ToList();
         }
-    } 
+        public bool AddCountry(Country country)
+        {
+            _context.Add(country);
+            _context.SaveChanges();
+            return true;
+        }
+
+    }
 
 
 }
