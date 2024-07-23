@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokimonReview", "PokimonReview\PokimonReview.csproj", "{1ACF5E5C-5066-4B66-B8AB-78A93D220586}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonReview", "PokemonReview\PokemonReview.csproj", "{789571D3-B001-4495-A3AC-166940A77765}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1ACF5E5C-5066-4B66-B8AB-78A93D220586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1ACF5E5C-5066-4B66-B8AB-78A93D220586}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1ACF5E5C-5066-4B66-B8AB-78A93D220586}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1ACF5E5C-5066-4B66-B8AB-78A93D220586}.Release|Any CPU.Build.0 = Release|Any CPU
+		{789571D3-B001-4495-A3AC-166940A77765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{789571D3-B001-4495-A3AC-166940A77765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{789571D3-B001-4495-A3AC-166940A77765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{789571D3-B001-4495-A3AC-166940A77765}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

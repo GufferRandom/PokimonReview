@@ -1,0 +1,45 @@
+﻿@model List<Pokemon>
+@{
+    ViewData["Title"] = "Pokemon Review";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Pokemon Review</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Pokemon Id
+                </th>
+                <th>
+                    Pokemon Name
+                </th>
+                <th>
+                    Pokemon Review
+                </th>
+                <th>
+                    Pokemon Reviewer
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pokemon in Model.OrderBy(p => p.Id))
+            {
+                <tr>
+                    <td>
+                        @pokemon.Id
+                    </td>
+                    <td>
+                        @pokemon.Name
+                    </td>
+                    <td>
+                        @pokemon.Review
+                    </td>
+                    <td>
+                        @pokemon.Reviewer
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
