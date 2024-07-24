@@ -1,0 +1,22 @@
+﻿@model Pokemon
+<form method="post">
+<div class="form">
+    <div class="container">
+        <div class="row pb-2">
+            <h2 class="text-primary">Add Pokemon</h2>
+        </div>
+        <label>Pokemon Name</label>
+        <input asp-for=Name class="form-control" />
+        <label>Review</label>
+        <input asp-for=Review class="form-control" />
+        <label>Reviewer</label>
+        <input asp-for=Reviewer class="form-control" />
+        <div class="row pt-4">
+            <div class="col-6">
+              <button type="submit" class="btn-outline-primary form-control">Add Pokemon</button>
+        </div>
+        <div class="col-6 text-end">
+          <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary form-control">Return To Pokemon List</a>
+    </div>
+</div>
+</form>

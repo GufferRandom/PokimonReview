@@ -17,6 +17,26 @@ namespace PokemonReview.Controllers
       
             return View(list_pokemons); 
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Pokemon pokemon)
+        {
+            if (pokemon == null)
+            {
+                StatusCode(404, "there is nothing in it please enter");
+                return BadRequest(ModelState);
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Pokemons.Add(pokemon);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();  
+        }
         
     }
 }

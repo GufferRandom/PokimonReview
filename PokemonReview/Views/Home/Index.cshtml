@@ -2,9 +2,15 @@
 @{
     ViewData["Title"] = "Pokemon Review";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Pokemon Review</h1>
+<div class="container">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text">Pokemon Review</h2>
+                </div>
+             <div class="col-6 text-end">
+            <a asp-controller="Home" asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add A Pokemon</a>
+    </div>
+        </div>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -38,8 +44,15 @@
                     <td>
                         @pokemon.Reviewer
                     </td>
+                    <td>
+                        <a asp-controller="Home" asp-action="Edit" class="btn btn-primary"><i class="bi bi-pencil-square"></i>Edit</a>
+                    </td>
+                    <td>
+                        <a asp-controller="Home" asp-action="Delete" class="btn btn-danger"><i class="bi bi-trash"></i>Delet</a>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
+</div>
 </div>
