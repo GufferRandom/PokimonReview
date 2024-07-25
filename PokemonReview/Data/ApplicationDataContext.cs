@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PokemonReview.Models;
 
 namespace PokemonReview.Data
 {
-    public class ApplicationDataContext : DbContext
+    public class ApplicationDataContext : IdentityDbContext
     {
 
         public ApplicationDataContext(DbContextOptions<ApplicationDataContext> options) : base(options)
@@ -14,6 +16,8 @@ namespace PokemonReview.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(p => new { p.LoginProvider, p.ProviderKey });
             modelBuilder.Entity<Pokemon>().HasData
                 (
                 new Pokemon { Id = 1, Name = "Pikachu", Review = "Pickahu is the best pokemon, because it is electric", Reviewer = "Ash" },

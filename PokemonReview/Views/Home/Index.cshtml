@@ -45,10 +45,10 @@
                         @pokemon.Reviewer
                     </td>
                     <td>
-                        <a asp-controller="Home" asp-action="Edit" class="btn btn-primary"><i class="bi bi-pencil-square"></i>Edit</a>
+                        <a asp-controller="Home" asp-action="Edit" asp-route-id="@pokemon.Id" class="btn btn-primary"><i class="bi bi-pencil-square"></i>Edit</a>
                     </td>
                     <td>
-                        <a asp-controller="Home" asp-action="Delete" class="btn btn-danger"><i class="bi bi-trash"></i>Delet</a>
+                        <a asp-controller="Home" asp-action="Delete" asp-route-id="@pokemon.Id" class="btn btn-danger"><i class="bi bi-trash"></i>Delet</a>
                     </td>
                 </tr>
             }

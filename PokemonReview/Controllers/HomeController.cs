@@ -10,12 +10,12 @@ namespace PokemonReview.Controllers
 
     {
         private readonly ApplicationDataContext _db;
-        public HomeController(ApplicationDataContext db) {  _db = db; }
+        public HomeController(ApplicationDataContext db) { _db = db; }
         public IActionResult Index()
         {
             var list_pokemons = _db.Pokemons.ToList();
-      
-            return View(list_pokemons); 
+
+            return View(list_pokemons);
         }
         public IActionResult Create()
         {
@@ -35,8 +35,61 @@ namespace PokemonReview.Controllers
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View();  
+            return View();
         }
-        
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound(ModelState);
+            }
+           
+            
+            var get_pokemon = _db.Pokemons.Where(u => u.Id == id).FirstOrDefault();
+            if (get_pokemon == null)
+            {
+                return NotFound();
+            }
+            return View(get_pokemon);
+
+        }
+        [HttpPost]
+        public IActionResult Edit(Pokemon pokemon)
+        {
+            if(ModelState.IsValid)
+            {
+                _db.Pokemons.Update(pokemon);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound(ModelState);
+            }
+            var get_pokemon = _db.Pokemons.Where(u => u.Id == id).FirstOrDefault();
+            if (get_pokemon == null)
+            {
+                return NotFound();
+            }
+            return View(get_pokemon);
+
+
+        }
+        [HttpPost,ActionName("Delete")]
+        public IActionResult DeletePost(int? id)
+        {
+            if (ModelState.IsValid)
+            {
+                var pokemon = _db.Pokemons.Where(u => u.Id == id).FirstOrDefault();
+                _db.Pokemons.Remove(pokemon);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
     }
-}
+     }
