@@ -1,6 +1,6 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PokemonReview.Data;
-
 namespace PokemonReview
 {
     public class Program
@@ -14,6 +14,13 @@ namespace PokemonReview
             builder.Services.AddDbContext<ApplicationDataContext>(
                 options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDataContext>();
+            builder.Services.AddAuthentication().AddGoogle(googleoptions =>
+            {
+                googleoptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+                googleoptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+
+            });
             var app = builder.Build();
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -29,11 +36,10 @@ namespace PokemonReview
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
             app.Run();
         }
     }

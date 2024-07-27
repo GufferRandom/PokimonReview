@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PokemonReview.Data;
 using PokemonReview.Models;
@@ -11,6 +12,7 @@ namespace PokemonReview.Controllers
     {
         private readonly ApplicationDataContext _db;
         public HomeController(ApplicationDataContext db) { _db = db; }
+        [Authorize]
         public IActionResult Index()
         {
             var list_pokemons = _db.Pokemons.ToList();
