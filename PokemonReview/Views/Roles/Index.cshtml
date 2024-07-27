@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model List<IdentityRole>
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text">Roles</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Roles" asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add A Role</a>
+
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Role Id
+                </th>
+                <th>
+                    Role Name
+                </th>
+                <th>
+                    Role NormalizedName
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model.OrderBy(p => p.Name))
+            {
+                <tr>
+                    <td>
+                        @role.Id
+                    </td>
+                    <td>
+                        @role.Name
+                    </td>
+                    <td>
+                        @role.NormalizedName
+                    </td>
+                    <td>
+                        <a asp-controller="Roles" asp-action="Edit" asp-route-id="@role.Id" class="btn btn-primary"><i class="bi bi-pencil-square"></i>Edit</a>
+                    </td>
+                    <td>
+                        <a asp-controller="Roles" asp-action="Delete" asp-route-id="@role.Id" class="btn btn-danger"><i class="bi bi-trash"></i>Delet</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+</div>

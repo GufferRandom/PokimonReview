@@ -12,8 +12,8 @@ using PokemonReview.Data;
 namespace PokemonReview.Migrations
 {
     [DbContext(typeof(ApplicationDataContext))]
-    [Migration("20240725071852_Added")]
-    partial class Added
+    [Migration("20240727125653_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

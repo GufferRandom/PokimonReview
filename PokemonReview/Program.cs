@@ -14,7 +14,10 @@ namespace PokemonReview
             builder.Services.AddDbContext<ApplicationDataContext>(
                 options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDataContext>();
+            builder.Services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDataContext>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI();
             builder.Services.AddAuthentication().AddGoogle(googleoptions =>
             {
                 googleoptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];

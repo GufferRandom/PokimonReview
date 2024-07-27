@@ -3,27 +3,16 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace PokemonReview.Migrations
 {
     /// <inheritdoc />
-    public partial class Added : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Pokemon",
-                table: "Pokemon");
-
-            migrationBuilder.RenameTable(
-                name: "Pokemon",
-                newName: "Pokemons");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Pokemons",
-                table: "Pokemons",
-                column: "Id");
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -61,6 +50,21 @@ namespace PokemonReview.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pokemons",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Review = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Reviewer = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pokemons", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,6 +173,15 @@ namespace PokemonReview.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Pokemons",
+                columns: new[] { "Id", "Name", "Review", "Reviewer" },
+                values: new object[,]
+                {
+                    { 1, "Pikachu", "Pickahu is the best pokemon, because it is electric", "Ash" },
+                    { 2, "Squirtle", "Squirtle is the best a killing rocks", "James Bond" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -228,23 +241,13 @@ namespace PokemonReview.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Pokemons");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_Pokemons",
-                table: "Pokemons");
-
-            migrationBuilder.RenameTable(
-                name: "Pokemons",
-                newName: "Pokemon");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_Pokemon",
-                table: "Pokemon",
-                column: "Id");
         }
     }
 }
